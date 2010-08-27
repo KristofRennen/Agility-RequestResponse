@@ -1,0 +1,22 @@
+= Agility: RequestResponse
+
+A Request / Response Service Layer For .NET
+
+== Basic Uage
+
+A basic usage guide will be provided
+
+== Versions
+
+Version release information will be provided
+
+== Contributing
+
+1. Get a Github account
+2. Fork the project
+3. Make your feature addition or bugfix. 
+4. Send a pull request via GitHub
+
+== Copyright
+
+Copyright (c) Kristof Rennen 2010.
