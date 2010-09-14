@@ -1,5 +1,6 @@
 bin
 obj
-ReSharper
+*ReSharper*
 *.user
 *.suo
+*.Documentation

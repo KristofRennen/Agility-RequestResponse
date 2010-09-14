@@ -2,13 +2,10 @@
 
 A Request / Response Service Layer For .NET
 
-== Basic Uage
-
-A basic usage guide will be provided
-
 == Versions
 
-Version release information will be provided
+v1.0.0 - 2010/09/14
+ + Initial version
 
 == Contributing
 
