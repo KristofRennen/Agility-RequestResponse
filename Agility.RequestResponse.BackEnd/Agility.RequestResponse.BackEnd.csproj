@@ -50,6 +50,7 @@
     <Compile Include="..\Agility.RequestResponse.Versioning\ProductInfo.cs">
       <Link>Properties\ProductInfo.cs</Link>
     </Compile>
+    <Compile Include="RequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Agility.RequestResponse.Versioning\Release.notes">
