@@ -50,6 +50,18 @@ namespace Agility.RequestResponse.Tests
             Assert.IsNotNull(response.Errors);
             Assert.AreEqual(1, response.Errors.Count);
         }
+
+        [Test]
+        public void Handle_ThrowsException_ResponseContainsCorrectErrorDetails()
+        {
+            var request = new SayHelloRequest { SayHelloTo = "Kristof" };
+            var response = new ExceptionRequestHandler().Handle(request) as SayHelloResponse;
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual("Work in progress", response.Errors[0].Message);
+            Assert.AreEqual("Agility.RequestResponse.Tests", response.Errors[0].Source);
+            Assert.IsNotNull(response.Errors[0].Trace);
+        }
     }
 
     class SayHelloRequest : Request
@@ -78,7 +90,7 @@ namespace Agility.RequestResponse.Tests
     {
         protected override SayHelloResponse Handle(SayHelloRequest request)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Work in progress");
         }
     }
 }

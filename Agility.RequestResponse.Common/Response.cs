@@ -9,12 +9,12 @@ namespace Agility.RequestResponse.Common
     {
         protected Response()
         {
-            Errors = new List<string>();
+            Errors = new List<Error>();
         }
 
         /// <summary>
         /// List of all errors occurred when generating this response.
         /// </summary>
-        public List<string> Errors { get; private set; }
+        public List<Error> Errors { get; private set; }
     }
 }
