@@ -17,7 +17,7 @@ namespace Agility.RequestResponse.BackEnd
         /// </summary>
         /// <param name="request">The request to process <seealso cref="Agility.RequestResponse.Common.Request"/>.</param>
         /// <returns>A response <seealso cref="Agility.RequestResponse.Common.Response"/></returns>
-        TResponse Handle(TRequest request);
+        Response Handle(Request request);
     }
 
     /// <summary>
@@ -36,7 +36,16 @@ namespace Agility.RequestResponse.BackEnd
         /// <returns></returns>
         public Response Handle(Request request)
         {
-            return Handle(request as TRequest);
+            try
+            {
+                return Handle(request as TRequest);
+            }
+            catch (Exception e)
+            {
+                var response = Activator.CreateInstance<TResponse>();
+                response.Errors.Add(e.Message);
+                return response;
+            }
         }
 
         /// <summary>
@@ -44,7 +53,7 @@ namespace Agility.RequestResponse.BackEnd
         /// </summary>
         /// <param name="request">The request to process <seealso cref="Agility.RequestResponse.Common.Request"/>.</param>
         /// <returns>A response <seealso cref="Agility.RequestResponse.Common.Response"/>.</returns>
-        public abstract TResponse Handle(TRequest request);
+        protected abstract TResponse Handle(TRequest request);
 
         /// <summary>
         /// Creates a new instance for the given response.

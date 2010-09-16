@@ -12,7 +12,7 @@ namespace Agility.RequestResponse.Tests
         public void Handle_SayHelloToIsEmpty_ReturnsHelloExclamationMark()
         {
             var request = new SayHelloRequest {SayHelloTo = ""};
-            var response = new SayHelloRequestHandler().Handle(request);
+            var response = new SayHelloRequestHandler().Handle(request) as SayHelloResponse;
 
             Assert.IsNotNull(response);
             Assert.AreEqual("Hello !", response.Message);
@@ -22,7 +22,7 @@ namespace Agility.RequestResponse.Tests
         public void Handle_SayHelloToKristof_ReturnsHelloKristofExclamationMark()
         {
             var request = new SayHelloRequest { SayHelloTo = "Kristof" };
-            var response = new SayHelloRequestHandler().Handle(request);
+            var response = new SayHelloRequestHandler().Handle(request) as SayHelloResponse;
 
             Assert.IsNotNull(response);
             Assert.AreEqual("Hello Kristof!", response.Message);
@@ -38,6 +38,18 @@ namespace Agility.RequestResponse.Tests
             Assert.IsTrue(response is SayHelloResponse);
             Assert.AreEqual("Hello Kristof!", ((SayHelloResponse) response).Message);
         }
+
+        [Test]
+        public void Handle_ThrowsException_ReturnsResponseWithErrors()
+        {
+            var request = new SayHelloRequest { SayHelloTo = "Kristof" };
+            var response = new ExceptionRequestHandler().Handle(request) as SayHelloResponse;
+
+            Assert.IsNotNull(response);
+            Assert.IsNull(response.Message);
+            Assert.IsNotNull(response.Errors);
+            Assert.AreEqual(1, response.Errors.Count);
+        }
     }
 
     class SayHelloRequest : Request
@@ -52,13 +64,21 @@ namespace Agility.RequestResponse.Tests
 
     class SayHelloRequestHandler : RequestHandler<SayHelloRequest, SayHelloResponse>
     {
-        public override SayHelloResponse Handle(SayHelloRequest request)
+        protected override SayHelloResponse Handle(SayHelloRequest request)
         {
             var response = CreateResponse();
 
             response.Message = string.Format("Hello {0}!", request.SayHelloTo);
 
             return response;
+        }
+    }
+
+    class ExceptionRequestHandler : RequestHandler<SayHelloRequest, SayHelloResponse>
+    {
+        protected override SayHelloResponse Handle(SayHelloRequest request)
+        {
+            throw new NotImplementedException();
         }
     }
 }
