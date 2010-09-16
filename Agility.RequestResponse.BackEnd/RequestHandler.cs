@@ -43,7 +43,7 @@ namespace Agility.RequestResponse.BackEnd
             catch (Exception e)
             {
                 var response = Activator.CreateInstance<TResponse>();
-                response.Errors.Add(new Error { Message = e.Message, Source = e.Source, Trace = e.StackTrace});
+                response.AddError(e);
                 return response;
             }
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Agility.RequestResponse.BackEnd;
 using Agility.RequestResponse.Common;
 using NUnit.Framework;
@@ -48,7 +49,7 @@ namespace Agility.RequestResponse.Tests
             Assert.IsNotNull(response);
             Assert.IsNull(response.Message);
             Assert.IsNotNull(response.Errors);
-            Assert.AreEqual(1, response.Errors.Count);
+            Assert.AreEqual(1, response.Errors.Count());
         }
 
         [Test]
@@ -58,9 +59,9 @@ namespace Agility.RequestResponse.Tests
             var response = new ExceptionRequestHandler().Handle(request) as SayHelloResponse;
 
             Assert.IsNotNull(response);
-            Assert.AreEqual("Work in progress", response.Errors[0].Message);
-            Assert.AreEqual("Agility.RequestResponse.Tests", response.Errors[0].Source);
-            Assert.IsNotNull(response.Errors[0].Trace);
+            Assert.AreEqual("Work in progress", response.Errors.ElementAt(0).Message);
+            Assert.AreEqual("Agility.RequestResponse.Tests", response.Errors.ElementAt(0).Source);
+            Assert.IsNotNull(response.Errors.ElementAt(0).Trace);
         }
     }
 

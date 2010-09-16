@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Agility.RequestResponse.Common
@@ -15,6 +16,16 @@ namespace Agility.RequestResponse.Common
         /// <summary>
         /// List of all errors occurred when generating this response.
         /// </summary>
-        public List<Error> Errors { get; private set; }
+        public IEnumerable<Error> Errors { get; private set; }
+
+        /// <summary>
+        /// Adds a new error based on the given exception <seealso cref="System.Exception"/>.
+        /// </summary>
+        /// <param name="exception">The exception to create the error from.</param>
+        public void AddError(Exception exception)
+        {
+            var errors = Errors as List<Error>;
+            errors.Add(new Error { Message = exception.Message, Source = exception.Source, Trace = exception.StackTrace });
+        }
     }
 }
