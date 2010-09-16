@@ -1,3 +1,5 @@
+using System;
+
 namespace Agility.RequestResponse.Common
 {
     /// <summary>

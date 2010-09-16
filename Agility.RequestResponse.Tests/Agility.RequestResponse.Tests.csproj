@@ -48,6 +48,7 @@
       <Link>Properties\ProductInfo.cs</Link>
     </Compile>
     <Compile Include="RequestHandlerTests.cs" />
+    <Compile Include="SerializationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Agility.RequestResponse.Versioning\Release.notes">
